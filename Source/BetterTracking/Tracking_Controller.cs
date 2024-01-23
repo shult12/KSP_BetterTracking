@@ -248,9 +248,7 @@ namespace BetterTracking
 
         private Camera FindCamera()
         {
-            if (_TrackingStation.listContainer.parent != null)
-                return _TrackingStation.listContainer.GetComponentInParent<Canvas>().worldCamera;
-            else if (_NewTrackingList != null && _NewTrackingList.transform.parent != null)
+            if (_NewTrackingList != null && _NewTrackingList.transform.parent != null)
                 return _NewTrackingList.GetComponentInParent<Canvas>().worldCamera;
 
             return null;
