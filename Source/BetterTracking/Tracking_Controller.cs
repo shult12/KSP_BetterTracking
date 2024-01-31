@@ -64,10 +64,8 @@ namespace BetterTracking
         private Transform _ListParent;
 
         ReorderableList _ReorderableList;
-
+        
         private ScrollRect _ScrollView;
-        private Rect _ScrollViewRect;
-        private Camera _CanvasCamera;
         
         private Tracking_Mode _CurrentMode = Tracking_Mode.CelestialBody;
 
@@ -104,16 +102,6 @@ namespace BetterTracking
         public ToggleGroup TrackingToggleGroup
         {
             get { return _VesselToggleGroup; }
-        }
-        
-        public Rect TrackingScrollView
-        {
-            get { return _ScrollViewRect; }
-        }
-
-        public Camera CanvasCamera
-        {
-            get { return _CanvasCamera; }
         }
 
         public bool LightAdded
@@ -183,10 +171,8 @@ namespace BetterTracking
             }
 
             _ListParent = _TrackingStation.listContainer.parent;
-
+            
             FindScrollRect();
-
-            StartCoroutine(WaitForCamera());
 
             AdjustUITransforms();
 
@@ -226,55 +212,6 @@ namespace BetterTracking
                 Tracking_Utils.TrackingLog("Scroll Rect Not Found");
             else
                 Tracking_Utils.TrackingLog("Scroll Rect Found");
-        }
-
-        private IEnumerator WaitForCamera()
-        {
-            while (_CanvasCamera == null)
-            {
-                _CanvasCamera = FindCamera();
-
-                if (_CanvasCamera == null)
-                    Tracking_Utils.TrackingLog("Canvas Camera Not Found");
-                else
-                    Tracking_Utils.TrackingLog("Canvas Camera Found");
-
-                if (_CanvasCamera == null)
-                    yield return null;
-            }
-
-            FindCorners();
-        }
-
-        private Camera FindCamera()
-        {
-            if (_NewTrackingList != null && _NewTrackingList.transform.parent != null)
-                return _NewTrackingList.GetComponentInParent<Canvas>().worldCamera;
-
-            return null;
-        }
-
-        private void FindCorners()
-        {
-            if (_ScrollView == null || _CanvasCamera == null)
-                return;
-
-            Vector3[] objectCorners = new Vector3[4];
-            ((RectTransform)_ScrollView.transform).GetWorldCorners(objectCorners);
-            
-            Vector3 bl = _CanvasCamera.WorldToScreenPoint(objectCorners[0]);
-            
-            float x = bl.x;
-            float y = bl.y;
-
-            bl = _CanvasCamera.WorldToScreenPoint(objectCorners[2]);
-            
-            float width = bl.x - x;
-            float height = bl.y - y;
-
-            _ScrollViewRect = new Rect(x, y, width, height);
-
-            Tracking_Utils.TrackingLog("Detected Vessel List Corners");
         }
 
         private void AdjustUITransforms()
