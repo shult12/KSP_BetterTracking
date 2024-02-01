@@ -223,8 +223,8 @@ namespace BetterTracking
 
             if (listRect != null)
             {
-                listRect.anchoredPosition = new Vector2(5, -142);
-                listRect.sizeDelta = new Vector2(280, -177);
+                listRect.anchoredPosition = new Vector2(5, -133);
+                listRect.sizeDelta = new Vector2(280, -213);
             }
 
             RectTransform headerRect = _TrackingStation.listContainer.parent.parent.parent.GetChild(2) as RectTransform;
