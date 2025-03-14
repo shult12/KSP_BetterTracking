@@ -1,0 +1,7 @@
+Changelog
+
+1.0.4
+	Thanks to github user @shult12 for these fixes:
+		Fixed tracking station selecting vessel when terminating mission or sorting the list
+		Fixed map vessel filters throwing errors
+	Fixed error with GameEvents not properly unhooking the event handlers

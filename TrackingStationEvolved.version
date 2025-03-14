@@ -1,9 +1,9 @@
 {
      "NAME":"Tracking Station Evolved",
 	 "URL":"https://raw.githubusercontent.com/linuxgurugamer/KSP_BetterTracking/refs/heads/master/TrackingStationEvolved.version",
-	 "DOWNLOAD":"https://github.com/DMagic1/KSP_BetterTracking/releases",
+	 "DOWNLOAD":"https://github.com/linuxgurugamer/KSP_BetterTracking/releases",
      "GITHUB":{
-         "USERNAME":"DMagic1",
+         "USERNAME":"linuxgurugamer",
          "REPOSITORY":"KSP_BetterTracking",
          "ALLOW_PRE_RELEASE":false,
      },

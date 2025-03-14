@@ -132,13 +132,13 @@ namespace BetterTracking
 
             _instance = this;
 
-            OnWidgetSelect.AddListener(new UnityAction<TrackingStationWidget>(OnWidgetSelected));
-            OnWidgetAwake.AddListener(new UnityAction<TrackingStationWidget>(OnWidgetAwaken));
+            OnWidgetSelect.AddListener(OnWidgetSelected);
+            OnWidgetAwake.AddListener(OnWidgetAwaken);
 
-            GameEvents.onNewVesselCreated.Add(new EventData<Vessel>.OnEvent(OnVesselCreate));
-            GameEvents.onVesselDestroy.Add(new EventData<Vessel>.OnEvent(OnVesselDestroy));
-            GameEvents.onKnowledgeChanged.Add(new EventData<GameEvents.HostedFromToAction<IDiscoverable, DiscoveryLevels>>.OnEvent(OnKnowledgeChange));
-            GameEvents.OnMapViewFiltersModified.Add(new EventData<MapViewFiltering.VesselTypeFilter>.OnEvent(OnMapViewFiltersModified));
+            GameEvents.onNewVesselCreated.Add(OnVesselCreate);
+            GameEvents.onVesselDestroy.Add(OnVesselDestroy);
+            GameEvents.onKnowledgeChanged.Add(OnKnowledgeChange);
+            GameEvents.OnMapViewFiltersModified.Add(OnMapViewFiltersModified);
 
             _CurrentMode = (Tracking_Mode)Tracking_Persistence.SortMode;
 
@@ -150,13 +150,13 @@ namespace BetterTracking
             if (_instance == this)
                 _instance = null;
             
-            OnWidgetSelect.RemoveListener(new UnityAction<TrackingStationWidget>(OnWidgetSelected));
-            OnWidgetAwake.RemoveListener(new UnityAction<TrackingStationWidget>(OnWidgetAwaken));
+            OnWidgetSelect.RemoveListener(OnWidgetSelected);
+            OnWidgetAwake.RemoveListener(OnWidgetAwaken);
 
-            GameEvents.onNewVesselCreated.Remove(new EventData<Vessel>.OnEvent(OnVesselCreate));
-            GameEvents.onVesselDestroy.Remove(new EventData<Vessel>.OnEvent(OnVesselDestroy));
-            GameEvents.onKnowledgeChanged.Remove(new EventData<GameEvents.HostedFromToAction<IDiscoverable, DiscoveryLevels>>.OnEvent(OnKnowledgeChange));
-            GameEvents.OnMapViewFiltersModified.Remove(new EventData<MapViewFiltering.VesselTypeFilter>.OnEvent(OnMapViewFiltersModified));
+            GameEvents.onNewVesselCreated.Remove(OnVesselCreate);
+            GameEvents.onVesselDestroy.Remove(OnVesselDestroy);
+            GameEvents.onKnowledgeChanged.Remove(OnKnowledgeChange);
+            GameEvents.OnMapViewFiltersModified.Remove(OnMapViewFiltersModified);
         }
 
         private IEnumerator WaitForTrackingStation()
