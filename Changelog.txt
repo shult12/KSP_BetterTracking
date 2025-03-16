@@ -1,6 +1,6 @@
 Changelog
 
-1.0.4
+1.0.7.1
 	Thanks to github user @shult12 for these fixes:
 		Fixed tracking station selecting vessel when terminating mission or sorting the list
 		Fixed map vessel filters throwing errors

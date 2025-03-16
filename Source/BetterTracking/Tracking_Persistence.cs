@@ -27,8 +27,11 @@ THE SOFTWARE.
 */
 #endregion
 
+using KSP_Log;
 using System.Collections.Generic;
 using System.Linq;
+using static UnityEngine.UI.GridLayoutGroup;
+
 
 namespace BetterTracking
 {
@@ -43,7 +46,7 @@ namespace BetterTracking
 
         //Key is vessel type index; value is expanded status
         private static Dictionary<int, bool> _typePersistence = new Dictionary<int, bool>();
-        
+
         private static int _sortMode = 0;
 
         private static int _bodyOrderMode = 0;
@@ -54,13 +57,29 @@ namespace BetterTracking
         private static bool _typeAscOrder = false;
         private static bool _stockAscOrder = false;
 
+        private static Log Log = null;
+
         public static int GetBodyOrder(int index, int fallback)
         {
-            if (_bodyOrderList.Contains(index))
-                return _bodyOrderList.IndexOf(index);
-            else
-                _typeOrderList.Insert(fallback, index);
+            Log.Info("GetBodyOrder, index: " + index + ", fallback: " + fallback);
 
+            if (_typeOrderList.Contains(index))
+                return _typeOrderList.IndexOf(index);
+            else
+            {
+                // need to add check to be sure fallback is in the range of 0 and _typeOrderList.Count-1
+                // If not, then ????? add to end???
+                if (fallback <= _typeOrderList.Count - 1)
+                {
+                    Log.Info("GetBodyOrder, inserting: " + index + " at " + fallback);
+                    _typeOrderList.Insert(fallback, index);
+                }
+                else
+                {
+                    Log.Info("GetBodyOrder, appending: " + index);
+                    _typeOrderList.Append(index);
+                }
+            }
             return fallback;
         }
 
@@ -74,7 +93,7 @@ namespace BetterTracking
             {
                 if (old >= 0)
                     order = old + 1;
-                
+
                 _bodyOrderList.Insert(order, index);
             }
             else
@@ -96,7 +115,7 @@ namespace BetterTracking
         {
             get { return _bodyOrderList; }
         }
-        
+
         public static bool GetBodyPersistence(int index)
         {
             if (_bodyPersistence.ContainsKey(index))
@@ -114,14 +133,18 @@ namespace BetterTracking
             else
                 _bodyPersistence.Add(index, isOn);
         }
-        
+
         public static int GetTypeOrder(int index, int fallback)
         {
             if (_typeOrderList.Contains(index))
                 return _typeOrderList.IndexOf(index);
             else
+            {
+                // need to add check to be sure index is in the range of 0 and _typeOrderList.Count-1
+                // If not, then ????? add to end???
+                Log.Info("GetTypeOrder, index: " + index + ", fallback: " + fallback);
                 _typeOrderList.Insert(fallback, index);
-
+            }
             return fallback;
         }
 
@@ -135,7 +158,6 @@ namespace BetterTracking
             {
                 if (old >= 0)
                     order = old + 1;
-                
                 _typeOrderList.Insert(order, index);
             }
             else
@@ -147,7 +169,7 @@ namespace BetterTracking
 
                 if (current > order)
                     order++;
-                
+
                 _typeOrderList.Remove(index);
                 _typeOrderList.Insert(order, index);
             }
@@ -175,7 +197,7 @@ namespace BetterTracking
             else
                 _typePersistence.Add(index, isOn);
         }
-        
+
         public static int SortMode
         {
             get { return _sortMode; }
@@ -222,15 +244,20 @@ namespace BetterTracking
         {
             base.OnAwake();
 
+            if (Log == null)
+                Log = new Log("KSP_BetterTracking", Log.LEVEL.INFO);
+            Log.Info("OnAwake");
+
             if (_bodyOrderList != null)
                 return;
 
             _bodyOrderList = new List<int>();
 
-            var allBodies = FlightGlobals.Bodies.Where(b => b.referenceBody == Planetarium.fetch.Sun && b.referenceBody != b);
+            var aB = FlightGlobals.Bodies.Where(b => b.referenceBody != Planetarium.fetch.Sun).ToList();
+            int cnt = 0;
 
+            var allBodies = FlightGlobals.Bodies.Where(b => b.referenceBody == Planetarium.fetch.Sun && b.referenceBody != b);
             var orderedBodies = allBodies.OrderBy(b => b.orbit.semiMajorAxis).ToList();
-            
             for (int i = orderedBodies.Count - 1; i >= 0; i--)
             {
                 CelestialBody body = orderedBodies[i];

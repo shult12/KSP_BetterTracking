@@ -8,6 +8,10 @@ rem VERSIONFILE is the name of the version file, usually the same as GAMEDATA,
 rem    but not always
 
 set H=%KSPDIR%
+
+set H1=R:\KSP_1.12.5-CenturianMaximus
+set H2=R:\KSP_1.12.5-OPM
+
 set GAMEDIR=TrackingStationEvolved
 set GAMEDATA="GameData"
 set VERSIONFILE=%GAMEDIR%.version
@@ -20,6 +24,8 @@ copy /Y "%1%3".pdb "%GAMEDATA%\%GAMEDIR%\Plugins"
 copy /Y %VERSIONFILE% %GAMEDATA%\%GAMEDIR%
 
 xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%H%\GameData\%GAMEDIR%"
-xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%DP0%\GameData\%GAMEDIR%"
 
-pause
+xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%H1%\GameData\%GAMEDIR%"
+xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%H2%\GameData\%GAMEDIR%"
+
+rem pause
