@@ -36,7 +36,7 @@
 
 # 3:SOURCEFILE, DESTDIR
 3:TrackingStationEvolved.version,GameData/TrackingStationEvolved
-3:LICENSE.md,GameData/TrackingStationEvolved
+3:LICENSE,GameData/TrackingStationEvolved
 3:README.md,GameData/TrackingStationEvolved
 
 #
