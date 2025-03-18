@@ -1,7 +1,49 @@
 Changelog
 
 1.0.7.1
+	Adoption by Linuxgurugamer
 	Thanks to github user @shult12 for these fixes:
 		Fixed tracking station selecting vessel when terminating mission or sorting the list
 		Fixed map vessel filters throwing errors
 	Fixed error with GameEvents not properly unhooking the event handlers
+	Added fix for exception when a type index is requested which is out of bounds
+	Added check for an unfixed BodyOrderList (caused by previous bug)
+	
+1.0.7
+	Update for KSP 1.12.2
+	Update for Unity 2019.4
+	Fix hidden search and sort buttons at the top of the tracking list
+	Trigger vessel list rebuild when stock vessel filter options are changed
+
+1.0.6
+	Toggle a vessel's orbit display from its tracking station button
+
+1.0.5
+	Update for KSP 1.8
+
+1.0.4
+	Fix bug that prevented vessels from being focused on when their tracking station button was selected
+
+1.0.3
+	Added search box
+		Search for vessels by name from any of the available lists
+	Vessels with upcoming maneuver nodes will always be at the top of their respective lists
+	The "stock" vessel list is now sortable and searchable
+	Fixed bug when destroying, recovering or stopping tracking of the last vessel in the list
+	Make list updates less spastic when creating or destroying a vessel
+
+1.0.2
+	Add drag-and-drop re-ordering of vessel group elements
+		Use the drag handle on the right side of each top-level group
+	Add sort options
+		Sort by vessel launch time (stock behavior)
+		Sort by vessel name
+		Sort by vessel type or orbited body
+		Toggle ascending or descending order
+	All sort options and order data are persistent for each save file
+	Fix bug related to drawing the celestial body icons
+	Fix bug when displaying which vessel in the list is selected
+
+1.0.1
+	Initial release
+	

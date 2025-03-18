@@ -27,7 +27,6 @@ THE SOFTWARE.
 */
 #endregion
 
-using KSP_Log;
 using System.Collections.Generic;
 using System.Linq;
 using static UnityEngine.UI.GridLayoutGroup;
@@ -57,12 +56,9 @@ namespace BetterTracking
         private static bool _typeAscOrder = false;
         private static bool _stockAscOrder = false;
 
-        private static Log Log = null;
 
         public static int GetBodyOrder(int index, int fallback)
         {
-            Log.Info("GetBodyOrder, index: " + index + ", fallback: " + fallback);
-
             if (_typeOrderList.Contains(index))
                 return _typeOrderList.IndexOf(index);
             else
@@ -71,12 +67,10 @@ namespace BetterTracking
                 // If not, then ????? add to end???
                 if (fallback <= _typeOrderList.Count - 1)
                 {
-                    Log.Info("GetBodyOrder, inserting: " + index + " at " + fallback);
                     _typeOrderList.Insert(fallback, index);
                 }
                 else
                 {
-                    Log.Info("GetBodyOrder, appending: " + index);
                     _typeOrderList.Append(index);
                 }
             }
@@ -142,7 +136,6 @@ namespace BetterTracking
             {
                 // need to add check to be sure index is in the range of 0 and _typeOrderList.Count-1
                 // If not, then ????? add to end???
-                Log.Info("GetTypeOrder, index: " + index + ", fallback: " + fallback);
                 _typeOrderList.Insert(fallback, index);
             }
             return fallback;
@@ -244,20 +237,17 @@ namespace BetterTracking
         {
             base.OnAwake();
 
-            if (Log == null)
-                Log = new Log("KSP_BetterTracking", Log.LEVEL.INFO);
-            Log.Info("OnAwake");
-
             if (_bodyOrderList != null)
                 return;
 
             _bodyOrderList = new List<int>();
 
-            var aB = FlightGlobals.Bodies.Where(b => b.referenceBody != Planetarium.fetch.Sun).ToList();
-            int cnt = 0;
+            
 
             var allBodies = FlightGlobals.Bodies.Where(b => b.referenceBody == Planetarium.fetch.Sun && b.referenceBody != b);
             var orderedBodies = allBodies.OrderBy(b => b.orbit.semiMajorAxis).ToList();
+
+
             for (int i = orderedBodies.Count - 1; i >= 0; i--)
             {
                 CelestialBody body = orderedBodies[i];
@@ -307,8 +297,11 @@ namespace BetterTracking
             if (node.HasValue("BodyPersistence"))
                 _bodyPersistence = Tracking_Utils.ParseDictionary(node.GetValue("BodyPersistence"));
 
-            if (node.HasValue("BodyOrderList"))
-                _bodyOrderList = Tracking_Utils.ParseList(node.GetValue("BodyOrderList"));
+            if (node.HasValue("BodyOrderListFixed"))
+            {
+                if (node.HasValue("BodyOrderList"))
+                    _bodyOrderList = Tracking_Utils.ParseList(node.GetValue("BodyOrderList"));
+            }
 
             if (node.HasValue("TypePersistence"))
                 _typePersistence = Tracking_Utils.ParseDictionary(node.GetValue("TypePersistence"));
@@ -344,6 +337,7 @@ namespace BetterTracking
         {
             node.AddValue("BodyPersistence", Tracking_Utils.ConcatDictionary(_bodyPersistence));
 
+            node.AddValue("BodyOrderListFixed", true);
             node.AddValue("BodyOrderList", Tracking_Utils.ConcatList(_bodyOrderList));
 
             node.AddValue("TypePersistence", Tracking_Utils.ConcatDictionary(_typePersistence));

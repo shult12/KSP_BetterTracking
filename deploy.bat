@@ -11,7 +11,6 @@ set H=%KSPDIR%
 
 set H1=R:\KSP_1.12.5-CenturianMaximus
 set H2=R:\KSP_1.12.5-OPM
-
 set GAMEDIR=TrackingStationEvolved
 set GAMEDATA="GameData"
 set VERSIONFILE=%GAMEDIR%.version
