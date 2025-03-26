@@ -67,7 +67,7 @@
     <Compile Include="UI\Tracking_Vessel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BetterTracking.Unity\BetterTracking-Unity.csproj">
+    <ProjectReference Include="..\BetterTracking-Unity\BetterTracking-Unity.csproj">
       <Project>{41e325c0-fa09-4df0-8cd5-e9ccb309fd2d}</Project>
       <Name>BetterTracking-Unity</Name>
     </ProjectReference>

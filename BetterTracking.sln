@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterTracking", "BetterTracking\BetterTracking.csproj", "{2BEC9AF7-DCD2-4665-81F8-9853959AA436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterTracking-Unity", "BetterTracking.Unity\BetterTracking-Unity.csproj", "{41E325C0-FA09-4DF0-8CD5-E9CCB309FD2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterTracking-Unity", "BetterTracking-Unity\BetterTracking-Unity.csproj", "{41E325C0-FA09-4DF0-8CD5-E9CCB309FD2D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
