@@ -1,5 +1,8 @@
 Changelog
 
+1.0.8.2
+	Renamed the main DLL to allow CKAN to recognize if the mod was manually installed mod
+
 1.0.8.1
 	Fixed build error, version bump for CKAN
 
