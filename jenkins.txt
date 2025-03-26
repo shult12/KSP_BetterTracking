@@ -31,7 +31,7 @@
 1:TrackingStationEvolved, TrackingStationEvolved.version
 
 # 2:PROJNAME, PROJFILE, VERSIONFILE, PLUGINSFOLDER
-2:BetterTracking-Unity,BetterTracking-Unity/BetterTracking.Unity.csproj,TrackingStationEvolved.version,GameData/TrackingStationEvolved/Plugins
+2:BetterTracking-Unity,BetterTracking-Unity/BetterTracking-Unity.csproj,TrackingStationEvolved.version,GameData/TrackingStationEvolved/Plugins
 2:BetterTracking,BetterTracking/BetterTracking.csproj,TrackingStationEvolved.version,GameData/TrackingStationEvolved/Plugins
 
 # 3:SOURCEFILE, DESTDIR
