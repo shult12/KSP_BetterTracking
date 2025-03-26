@@ -1,5 +1,8 @@
 Changelog
 
+1.0.8.1
+	Fixed build error, version bump for CKAN
+
 1.0.8
 	Adoption by Linuxgurugamer
 	Thanks to github user @shult12 for these fixes:
