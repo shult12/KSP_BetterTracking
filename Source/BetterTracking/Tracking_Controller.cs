@@ -282,6 +282,12 @@ namespace BetterTracking
                 StartCoroutine(WaitForUpdate(3));
         }
 
+        public void OnVesselTypeChange()
+        {
+            if (_CurrentMode == Tracking_Mode.VesselType)
+                ListUpdate();
+        }
+
         private IEnumerator WaitForUpdate(int frames)
         {
             int time = 0;

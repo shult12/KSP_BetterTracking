@@ -166,7 +166,10 @@ namespace BetterTracking
                 return;
 
             if (_iconSprite.vesselType != _vesselWidget.vessel.vesselType)
+            {
                 _iconSprite.SetType(_vesselWidget.vessel.vesselType);
+                Tracking_Controller.Instance.OnVesselTypeChange();
+            }
         }
 
         public void OnMouseChange(PointerEventData eventData, bool enter)
